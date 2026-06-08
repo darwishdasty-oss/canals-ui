@@ -1,0 +1,25 @@
+name: Build Windows .exe
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install --upgrade pip && pip install -r requirements.txt && pip install pywebview pyinstaller
+      - name: Build the executable
+        run: pyinstaller hydraulic.spec --noconfirm --clean
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HydraulicStudio-windows
+          path: dist/HydraulicStudio.exe
