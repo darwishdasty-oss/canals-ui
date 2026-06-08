@@ -1,0 +1,7 @@
+streamlit>=1.30
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+# Only needed for the Windows .exe build (ignored at runtime)
+pywebview>=5.0
+pyinstaller>=6.0
